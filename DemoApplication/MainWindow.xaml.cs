@@ -21,6 +21,31 @@ namespace DemoApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        public class DataGridNumericColumn : DataGridTextColumn
+        {
+            protected override object PrepareCellForEdit(System.Windows.FrameworkElement editingElement, System.Windows.RoutedEventArgs editingEventArgs)
+            {
+                TextBox edit = editingElement as TextBox;
+                edit.PreviewTextInput += OnPreviewTextInput;
+
+                return base.PrepareCellForEdit(editingElement, editingEventArgs);
+            }
+
+            void OnPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+            {
+                try
+                {
+                    Convert.ToInt32(e.Text);
+                }
+                catch
+                {
+                    // Show some kind of error message if you want
+
+                    // Set handled to true
+                    e.Handled = true;
+                }
+            }
+        }
         #region Public Constructors
 
         public MainWindow()
@@ -53,5 +78,26 @@ namespace DemoApplication
         }
 
         #endregion Private Methods
+
+        private void FilterDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            // Save Update 
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+            }
+        }
+
+        private void FilterDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                //if (InterventionsViewModel.Current.SelectedIntervention != null)
+                //{
+                //    InterventionsViewModel.Current.SaveSelectedIntervention();
+
+                //}
+            }
+        }
     }
+
 }

@@ -52,6 +52,16 @@ namespace FilterDataGrid
         #endregion Public Properties
     }
 
+
+    //h
+    /// <summary>
+    /// ToDO DataGridNumericColumn 
+    /// https://stackoverflow.com/questions/19374471/wpf-datagrid-create-a-datagridnumericcolumn-in-wpf
+    /// https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+    /// https://stackoverflow.com/questions/1346707/validation-in-textbox-in-wpf
+    /// https://karlhulme.wordpress.com/2007/02/15/masking-input-to-a-wpf-textbox/
+    /// 
+    /// </summary>
     public sealed class DataGridTextColumn : System.Windows.Controls.DataGridTextColumn
     {
         #region Public Fields

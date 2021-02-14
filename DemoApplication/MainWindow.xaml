@@ -77,9 +77,9 @@
             CanUserAddRows="False"
             ColumnWidth="*"
             DateFormatString=""
-            FilterLanguage="English"
+            FilterLanguage="French"
             HorizontalGridLinesBrush="LightGray"
-            IsReadOnly="True"
+            IsReadOnly="False"
             ItemsSource="{Binding FilteredList, UpdateSourceTrigger=PropertyChanged}"
             LoadingRow="DataGrid_LoadingRow"
             RowHeaderWidth="40"
@@ -87,7 +87,9 @@
             ShowStatusBar="True"
             VerticalGridLinesBrush="LightGray"
             VerticalScrollBarVisibility="Visible"
-            VirtualizingStackPanel.IsVirtualizing="True">
+            VirtualizingStackPanel.IsVirtualizing="True"
+            CellEditEnding="FilterDataGrid_CellEditEnding"
+            RowEditEnding="FilterDataGrid_RowEditEnding">
             <control:FilterDataGrid.Columns>
                 <control:DataGridTemplateColumn
                     FieldName="LastName"
@@ -101,7 +103,7 @@
                     </control:DataGridTemplateColumn.CellTemplate>
                 </control:DataGridTemplateColumn>
 
-                <control:DataGridTextColumn
+                <control:DataGridTextColumn 
                     Binding="{Binding FirstName}"
                     Header="First name"
                     IsColumnFiltered="True" />
@@ -109,9 +111,26 @@
                 <control:DataGridTextColumn
                     Binding="{Binding Salary}"
                     Header="Salary"
-                    IsColumnFiltered="True" />
+                    IsColumnFiltered="True" Width="60" />
+                
+                <control:DataGridTemplateColumn
+                    FieldName="Salary" IsReadOnly="False"
+                    Header="Salary template"
+                    IsColumnFiltered="True"
+                    SortMemberPath="Salary">
+                    <control:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="local:Employe">
+                            <TextBlock Text="{Binding Salary}" />
+                        </DataTemplate>
+                    </control:DataGridTemplateColumn.CellTemplate>
+                    <control:DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate DataType="local:Employe">
+                            <TextBlock Text="{Binding Salary}" />
+                        </DataTemplate>
+                    </control:DataGridTemplateColumn.CellEditingTemplate>
+                </control:DataGridTemplateColumn>
 
-                <control:DataGridTextColumn
+                <control:DataGridTextColumn 
                     Binding="{Binding Manager}"
                     Header="Manager"
                     IsColumnFiltered="True" />
